@@ -2,22 +2,45 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>API website</title>
-    <script defer src="https://unpkg.com/alpinejs@3.5.0/dist/cdn.min.js"></script>
+    <title>Driver Data</title>
 </head>
 <body>
-    <div x-data="{
-        responsedata: null,
-        async getData() {
-            this.responsedata = await (await fetch('https://useritem-api-service-michielkuyken.cloud.okteto.net/drivers/')).json();
+
+<div id="driverList"></div>
+
+<script>
+    async function fetchData() {
+        try {
+            const response = await fetch('https://useritem-api-service-michielkuyken.cloud.okteto.net/drivers/');
+            const data = await response.json();
+            displayData(data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
         }
-    }" x-init="getData">
-       <h2>Drivers</h2>
-        <ul>
-                <li x-for="driver in responsedata" :key="driver.id">
-                    <strong x-text="driver.achternaam"></strong> - <span x-text="driver.voornaam"></span>
-                </li>
-            </ul>
-    </div>
+    }
+
+    function displayData(data) {
+        const driverListContainer = document.getElementById('driverList');
+
+        // Check if there is data to display
+        if (data && Array.isArray(data) && data.length > 0) {
+            const ul = document.createElement('ul');
+
+            data.forEach(driver => {
+                const li = document.createElement('li');
+                li.textContent = `${driver.voornaam} ${driver.achternaam}`;
+                ul.appendChild(li);
+            });
+
+            driverListContainer.appendChild(ul);
+        } else {
+            driverListContainer.textContent = 'No drivers found.';
+        }
+    }
+
+    // Fetch data when the page loads
+    fetchData();
+</script>
+
 </body>
 </html>
