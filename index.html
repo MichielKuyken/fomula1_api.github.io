@@ -22,7 +22,17 @@
 
 <body>
      <div x-data="{driverData: driverData()}" x-init="driverData.fetch()">
-        drivers: <strong x-text="driverData.driver">Placeholder</strong>
+        <h2>Drivers</h2>
+        <ul>
+            <template x-if="driverData.drivers">
+                <li x-for="driver in driverData.drivers" :key="driver.id">
+                    <strong x-text="driver.achternaam"></strong> - <span x-text="driver.voornaam"></span>
+                </li>
+            </template>
+            <template x-if="!driverData.drivers">
+                <li>No drivers found</li>
+            </template>
+        </ul>
     </div>
 </body>
 </html>
