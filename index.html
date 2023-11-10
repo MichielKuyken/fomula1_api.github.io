@@ -13,7 +13,7 @@
                 fetch('https://useritem-api-service-michielkuyken.cloud.okteto.net/drivers/')
                     .then(res => res.json())
                     .then(res => {
-                        this.driver = res.drivers;
+                        this.driver = res;
                 })
             }
         }
@@ -22,7 +22,7 @@
 
 <body>
      <div x-data="{driverData: driverData()}" x-init="driverData.fetch()">
-        drivers: <strong x-text="driverData.title">Placeholder</strong>
+        drivers: <strong x-text="driverData.driver">Placeholder</strong>
     </div>
 </body>
 </html>
