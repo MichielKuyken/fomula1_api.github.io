@@ -4,19 +4,25 @@
     <meta charset="UTF-8">
     <title>API website</title>
     <script defer src="https://unpkg.com/alpinejs@3.5.0/dist/cdn.min.js"></script>
-</head>
-<body>
-     <div x-data="{
-        posts: {},
-
-        async getData() {
-            this.posts = await (await fetch('https://jsonplaceholder.typicode.com/posts')).json();
-
+    <script>
+        let driverData = function () {
+            return {
+                driver: null
+            },
+            fetch: function () {
+                fetch('https://useritem-api-service-michielkuyken.cloud.okteto.net/drivers/')
+                    .then(res => res.json())
+                    .then(res => {
+                        this.driver = res.drivers;
+                })
+            }
         }
-    }">
-        <button x-on:click="getData">Send get request</button>
-        Data returned: <strong x-text="posts[0].title">Placeholder</strong>
+    </script>
+</head>
 
+<body>
+     <div x-data="{driverData: driverData()}" x-init="driverData.fetch()">
+        drivers: <strong x-text="driverData.title">Placeholder</strong>
     </div>
 </body>
 </html>
