@@ -17,7 +17,7 @@
         <h2>Drivers</h2>
         <ul>
             <template x-if="responsedata" x-for="driver in responsedata">
-                <li key="driver.id">
+                <li x-bind:key="driver.id">
                     <strong x-text="driver.achternaam"></strong> - <span x-text="driver.voornaam"></span>
                 </li>
             </template>
