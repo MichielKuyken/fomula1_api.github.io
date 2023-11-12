@@ -15,7 +15,7 @@
         }
     }" x-init="getData">
         <h2>Standings</h2>
-        <ul>
+        <ol>
             <template x-if="responsedata" x-for="standings in responsedata">
                 <li key="standings.id" x-if="standings.id > 0">
                     <strong x-text="standings.achternaam"></strong> - <span x-text="standings.voornaam"></span>: <span x-text="standings.punten"></span>
@@ -24,7 +24,7 @@
             <template x-if="!responsedata">
                 <li>No standings found</li>
             </template>
-        </ul>
+        </ol>
     </div>
     <a href="index.html">Index</a>
 </body>
