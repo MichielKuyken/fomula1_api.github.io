@@ -10,7 +10,7 @@
                 driver: null
             },
             fetch: function () {
-                fetch('https://useritem-api-service-michielkuyken.cloud.okteto.net/drivers/')
+                fetch('http://127.0.0.1:8000/drivers/')
                     .then(res => res.json())
                     .then(res => {
                         this.driver = res;
