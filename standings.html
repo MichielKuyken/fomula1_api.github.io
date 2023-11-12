@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>API website</title>
+    <script defer src="https://unpkg.com/alpinejs@3.5.0/dist/cdn.min.js"></script>
+</head>
+
+<body>
+     <div x-data="{
+        responsedata: null,
+        async getData() {
+            this.responsedata = await (await fetch('https://useritem-api-service-michielkuyken.cloud.okteto.net/standings/')).json();
+            console.log(this.responsedata);
+        }
+    }" x-init="getData">
+        <h2>Standings</h2>
+        <ul>
+            <template x-if="responsedata" x-for="standings in responsedata">
+                <li key="standings.id" x-if="standings.id > 0">
+                    <strong x-text="standings.achternaam"></strong> - <span x-text="standings.voornaam"></span>: <span x-text="standings.punten"></span>
+                </li>
+            </template>
+            <template x-if="!responsedata">
+                <li>No standings found</li>
+            </template>
+        </ul>
+    </div>
+</body>
+</html>
