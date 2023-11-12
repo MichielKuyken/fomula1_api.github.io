@@ -7,27 +7,8 @@
 </head>
 
 <body>
-     <div x-data="{
-        responsedata: null,
-        async getData() {
-            this.responsedata = await (await fetch('https://useritem-api-service-michielkuyken.cloud.okteto.net/drivers/')).json();
-            console.log(this.responsedata);
-        }
-    }" x-init="getData">
-        <h2>Drivers</h2>
-        <ul>
-            <template x-if="responsedata" x-for="driver in responsedata">
-                <li key="driver.id" x-if="diver.id > 0">
-                    <strong x-text="driver.achternaam"></strong> - <span x-text="driver.voornaam"></span>
-                </li>
-            </template>
-            <template x-if="!responsedata">
-                <li>No drivers found</li>
-            </template>
-        </ul>
-    </div>
-    <a href="drivers.html">Drivers</a>
-    <a href="grandprix.html">Grandprix</a>
+    <a href="drivers.html">Drivers</a> <br>
+    <a href="grandprix.html">Grandprix</a> <br>
     <a href="standings.html">Standings</a>
 </body>
 </html>
