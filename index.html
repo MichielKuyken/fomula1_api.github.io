@@ -4,32 +4,24 @@
     <meta charset="UTF-8">
     <title>API website</title>
     <script defer src="https://unpkg.com/alpinejs@3.5.0/dist/cdn.min.js"></script>
-    <script>
-        const driverData = {
-            return {
-                driver: null
-            },
-            fetch: function () {
-                fetch('http://127.0.0.1:8000/drivers/')
-                    .then(res => res.json())
-                    .then(res => {
-                        this.driver = res;
-                })
-            }
-        }
-    </script>
 </head>
 
 <body>
-     <div x-data="{driverData: driverData()}" x-init="driverData.fetch()">
+     <div x-data="{
+        responsedata: null,
+        async getData() {
+            this.responsedata = await (await fetch('http://127.0.0.1:8000/drivers/')).json();
+            console.log(this.responsedata);
+        }
+    }" x-init="getData">
         <h2>Drivers</h2>
         <ul>
-            <template x-if="driverData.drivers">
-                <li x-for="driver in driverData.drivers" :key="driver.id">
+            <template x-if="responsedata" x-for="driver in responsedata">
+                <li key="driver.id">
                     <strong x-text="driver.achternaam"></strong> - <span x-text="driver.voornaam"></span>
                 </li>
             </template>
-            <template x-if="!driverData.drivers">
+            <template x-if="!responsedata">
                 <li>No drivers found</li>
             </template>
         </ul>
