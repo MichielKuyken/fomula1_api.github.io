@@ -10,7 +10,7 @@
      <div x-data="{
         responsedata: null,
         async getData() {
-            this.responsedata = await (await fetch('http://127.0.0.1:8000/drivers/')).json();
+            this.responsedata = await (await fetch('https://useritem-api-service-michielkuyken.cloud.okteto.net/drivers/')).json();
             console.log(this.responsedata);
         }
     }" x-init="getData">
